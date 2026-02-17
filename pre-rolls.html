@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Plug Shop | Premium Pre-Rolls</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #39ff14;
+            --dark: #0a0a0a;
+            --gray: rgba(21, 21, 21, 0.9);
+            --border: #222;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family: 'Poppins', sans-serif; background: var(--dark); color: white; overflow-x: hidden; }
+
+        /* SMOKE BACKGROUND EFFECT */
+        .smoke-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+        .smoke-particle { position: absolute; width: 400px; height: 400px; background: radial-gradient(circle, rgba(57,255,20,0.03) 0%, transparent 70%); border-radius: 50%; filter: blur(60px); animation: drift 20s infinite linear; opacity: 0.5; }
+        @keyframes drift { 0% { transform: translate(-10%, 110%) scale(1); } 100% { transform: translate(110%, -10%) scale(1.5); } }
+
+        /* HEADER */
+        nav { display: flex; align-items: center; justify-content: space-between; padding: 15px 5%; background: rgba(0,0,0,0.95); border-bottom: 1px solid var(--border); position: sticky; top:0; z-index: 1000; }
+        .logo img { height: 50px; }
+        .back-home { color: var(--primary); text-decoration: none; font-size: 14px; font-weight: 600; }
+
+        /* SHOP LAYOUT */
+        .shop-container { display: flex; padding: 40px 5%; gap: 30px; }
+
+        /* SIDEBAR */
+        .sidebar { width: 280px; flex-shrink: 0; }
+        .search-box { margin-bottom: 30px; background: var(--gray); padding: 20px; border-radius: 12px; border: 1px solid var(--border); }
+        .search-box h3 { font-size: 16px; margin-bottom: 15px; color: var(--primary); text-transform: uppercase; }
+        .search-input-group { display: flex; gap: 5px; }
+        .search-input-group input { flex: 1; padding: 10px; border-radius: 5px; border: 1px solid var(--border); background: #111; color: white; outline: none; font-size: 13px; }
+        .search-btn { background: #e1b12c; border: none; padding: 0 15px; border-radius: 5px; cursor: pointer; font-weight: 700; }
+
+        .filter-group { margin-bottom: 30px; background: var(--gray); padding: 20px; border-radius: 12px; border: 1px solid var(--border); }
+        .filter-group h3 { font-size: 16px; margin-bottom: 15px; color: var(--primary); text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 5px; }
+        .filter-item { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-size: 14px; color: #bbb; cursor: pointer; }
+        .filter-item input { accent-color: var(--primary); }
+
+        /* PRODUCT GRID */
+        .main-shop { flex-grow: 1; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+
+        /* PRODUCT CARD */
+        .product-card { background: var(--gray); border-radius: 12px; overflow: hidden; border: 1px solid var(--border); transition: 0.3s; position: relative; }
+        .product-card:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 5px 15px rgba(57, 255, 20, 0.2); }
+        .img-box { width: 100%; height: 200px; background: #111; display: flex; align-items: center; justify-content: center; }
+        .img-box img { max-width: 85%; max-height: 85%; object-fit: contain; }
+
+        .badge { position: absolute; top: 10px; right: 10px; background: #ff3131; color: white; padding: 4px 8px; font-size: 10px; font-weight: 800; border-radius: 5px; }
+        .content { padding: 15px; }
+        .rating { color: #f1c40f; font-size: 11px; margin-bottom: 5px; }
+        .content h4 { font-size: 14px; margin-bottom: 10px; color: #fff; height: 40px; overflow: hidden; }
+        .price { font-size: 18px; color: var(--primary); font-weight: 700; display: flex; align-items: baseline; gap: 8px; }
+        .price .old { color: #555; font-size: 14px; text-decoration: line-through; }
+
+        .add-btn { width: 100%; padding: 10px; background: transparent; border: 1px solid var(--primary); color: var(--primary); font-size: 12px; font-weight: 700; cursor: pointer; border-radius: 6px; margin-top: 15px; transition: 0.3s; text-transform: uppercase; }
+        .add-btn:hover { background: var(--primary); color: #000; }
+
+        @media (max-width: 768px) {
+            .shop-container { flex-direction: column; }
+            .sidebar { width: 100%; }
+            .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="smoke-container">
+        <div class="smoke-particle" style="left: 20%; animation-delay: 0s;"></div>
+        <div class="smoke-particle" style="left: 60%; animation-delay: 5s;"></div>
+    </div>
+
+    <nav>
+        <div class="logo"><img src="/img/logo_of_client-removebg-preview.png" alt="Logo"></div>
+        <a href="index.html" class="back-home"><i class="fas fa-arrow-left"></i> Home</a>
+    </nav>
+
+    <div class="shop-container">
+        <aside class="sidebar">
+            <div class="search-box">
+                <h3><i class="fas fa-search"></i> Search Pre-Rolls</h3>
+                <div class="search-input-group">
+                    <input type="text" placeholder="Search...">
+                    <button class="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <h3>Categories</h3>
+                <div class="filter-list">
+                    <label class="filter-item"><input type="checkbox"> Infused Rolls</label>
+                    <label class="filter-item"><input type="checkbox" checked> 5-Pack Bundles</label>
+                    <label class="filter-item"><input type="checkbox"> Single Joints</label>
+                    <label class="filter-item"><input type="checkbox"> Diamond Infused</label>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <h3>Roll Type</h3>
+                <div class="filter-list">
+                    <label class="filter-item"><input type="radio" name="type" checked> Standard Paper</label>
+                    <label class="filter-item"><input type="radio" name="type"> Rose Petal</label>
+                    <label class="filter-item"><input type="radio" name="type"> Hemp Wrap</label>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-shop">
+            <div class="grid">
+                <div class="product-card">
+                    <div class="badge">BEST VALUE</div>
+                    <div class="img-box"><img src="/img/1701381010-5-pack_pre-rolls_1000x1000.avif" alt=""></div>
+                    <div class="content">
+                        <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <h4>OG Kush | 5-Pack Pre-Rolls</h4>
+                        <div class="price">$45.00 <span class="old">$60.00</span></div>
+                        <button class="add-btn">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="badge" style="background:orange;">ONLY 3 LEFT</div>
+                    <div class="img-box"><img src="/img/dimond.jpg" alt=""></div>
+                    <div class="content">
+                        <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
+                        <h4>Ghost Train Haze | 1.5g Infused</h4>
+                        <div class="price">$33.90 <span class="old">$45.00</span></div>
+                        <button class="add-btn">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="badge" style="background:var(--primary); color:black;">PREMIUM</div>
+                    <div class="img-box"><img src="/img/dimond.jpg" alt=""></div>
+                    <div class="content">
+                        <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <h4>Chernobyl | Rose Petal Infused</h4>
+                        <div class="price">$28.25 <span class="old">$40.00</span></div>
+                        <button class="add-btn">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer><p>© 2026 The Plug Store | Pre-Roll Collection</p></footer>
+
+</body>
+</html>

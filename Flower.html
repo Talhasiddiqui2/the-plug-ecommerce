@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Plug Shop | Premium Flower</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #39ff14;
+            --dark: #0a0a0a;
+            --gray: rgba(21, 21, 21, 0.9);
+            --border: #222;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family: 'Poppins', sans-serif; background: var(--dark); color: white; }
+
+        /* MATRIX BG */
+        #matrix-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.1; }
+
+        /* HEADER */
+        nav { display: flex; align-items: center; justify-content: space-between; padding: 15px 5%; background: rgba(0,0,0,0.95); border-bottom: 1px solid var(--border); position: sticky; top:0; z-index: 1000; }
+        .logo img { height: 60px; }
+        .back-home { color: var(--primary); text-decoration: none; font-size: 14px; font-weight: 600; }
+
+        /* SHOP LAYOUT */
+        .shop-container { display: flex; padding: 40px 5%; gap: 30px; }
+
+        /* SIDEBAR FILTERS */
+        .sidebar { width: 280px; flex-shrink: 0; }
+        
+        /* SEARCH BY PRODUCT BOX */
+        .search-box {
+            margin-bottom: 30px;
+            background: var(--gray);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+        .search-box h3 { font-size: 16px; margin-bottom: 15px; color: var(--primary); text-transform: uppercase; }
+        .search-input-group { display: flex; gap: 5px; }
+        .search-input-group input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--border);
+            background: #111;
+            color: white;
+            outline: none;
+            font-size: 13px;
+        }
+        .search-btn {
+            background: #e1b12c; /* Goldish yellow like your image */
+            border: none;
+            padding: 0 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 700;
+            color: black;
+        }
+
+        .filter-group { margin-bottom: 30px; background: var(--gray); padding: 20px; border-radius: 12px; border: 1px solid var(--border); }
+        .filter-group h3 { font-size: 16px; margin-bottom: 15px; color: var(--primary); text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 5px; }
+        .filter-list { list-style: none; }
+        .filter-item { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-size: 14px; color: #bbb; cursor: pointer; transition: 0.3s; }
+        .filter-item:hover { color: var(--primary); }
+        .filter-item input { accent-color: var(--primary); }
+
+        /* PRODUCT GRID */
+        .main-shop { flex-grow: 1; }
+        .shop-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+
+        /* PRODUCT CARD */
+        .product-card { background: var(--gray); border-radius: 12px; overflow: hidden; border: 1px solid var(--border); transition: 0.3s; position: relative; }
+        .product-card:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 5px 15px rgba(57, 255, 20, 0.2); }
+        
+        .img-box { width: 100%; height: 200px; background: #111; display: flex; align-items: center; justify-content: center; }
+        .img-box img { max-width: 80%; max-height: 80%; object-fit: contain; }
+
+        .discount-tag { position: absolute; top: 10px; right: 10px; background: #ff3131; color: white; padding: 4px 8px; font-size: 10px; font-weight: 800; border-radius: 5px; }
+
+        .content { padding: 15px; }
+        .rating { color: #f1c40f; font-size: 12px; margin-bottom: 5px; }
+        .content h4 { font-size: 14px; margin-bottom: 10px; color: #fff; height: 40px; overflow: hidden; }
+        .price { font-size: 18px; color: var(--primary); font-weight: 700; display: flex; align-items: center; gap: 10px; }
+        .price .old { color: #555; font-size: 14px; text-decoration: line-through; }
+
+        .add-btn { width: 100%; padding: 10px; background: transparent; border: 1px solid var(--primary); color: var(--primary); font-size: 12px; font-weight: 700; cursor: pointer; border-radius: 6px; margin-top: 15px; transition: 0.3s; text-transform: uppercase; }
+        .add-btn:hover { background: var(--primary); color: #000; }
+
+        /* MOBILE RESPONSIVE */
+        @media (max-width: 768px) {
+            .shop-container { flex-direction: column; }
+            .sidebar { width: 100%; }
+            .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .img-box { height: 150px; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="matrix-bg"></canvas>
+
+    <nav>
+        <div class="logo"><img src="/img/logo_of_client-removebg-preview.png" alt="Logo"></div>
+        <a href="index.html" class="back-home"><i class="fas fa-home"></i> Back to Home</a>
+    </nav>
+
+    <div class="shop-container">
+        <aside class="sidebar">
+            
+            <div class="search-box">
+                <h3><i class="fas fa-leaf"></i> Search by Products</h3>
+                <div class="search-input-group">
+                    <input type="text" placeholder="Search...">
+                    <button class="search-btn">Search</button>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <h3>Product Categories</h3>
+                <div class="filter-list">
+                    <label class="filter-item"><input type="checkbox"> On Sale</label>
+                    <label class="filter-item"><input type="checkbox" checked> Flower</label>
+                    <label class="filter-item"><input type="checkbox"> Mango Flovers</label>
+                    <label class="filter-item"><input type="checkbox"> Flovers</label>
+                    <label class="filter-item"><input type="checkbox"> Concentrate</label>
+                    <label class="filter-item"><input type="checkbox"> Edibles</label>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <h3>Plant Type</h3>
+                <div class="filter-list">
+                    <label class="filter-item"><input type="radio" name="ptype"> Indica-Dominant</label>
+                    <label class="filter-item"><input type="radio" name="ptype"> Sativa-Dominant</label>
+                    <label class="filter-item"><input type="radio" name="ptype" checked> Hybrid</label>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-shop">
+            <div class="shop-header">
+                <h2>Flower Collection</h2>
+                <p style="font-size: 12px; color: #555;">Showing products</p>
+            </div>
+
+            <div class="grid">
+                <div class="product-card">
+                    <div class="img-box"><img src="/img/dimond.jpg" alt=""></div>
+                    <div class="content">
+                        <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <h4>Mango Sticky Rice | 3.5g</h4>
+                        <div class="price">$62.15 <span class="old">$80.00</span></div>
+                        <button class="add-btn">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="discount-tag">-10%</div>
+                    <div class="img-box"><img src="/img/1701381010-5-pack_pre-rolls_1000x1000.avif" alt=""></div>
+                    <div class="content">
+                        <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
+                        <h4>Tangerine Dream Hybrid</h4>
+                        <div class="price">$7.97 <span class="old">$10.97</span></div>
+                        <button class="add-btn">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="img-box"><img src="/img/hitech 1.avif" alt=""></div>
+                    <div class="content">
+                        <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <h4>Lemon Skunk Sativa</h4>
+                        <div class="price">$6.97</div>
+                        <button class="add-btn">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Matrix BG Effect
+        const canvas = document.getElementById('matrix-bg');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        const letters = "01"; const fontSize = 16; const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+        function draw() {
+            ctx.fillStyle = "rgba(10, 10, 10, 0.05)"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#39ff14"; ctx.font = fontSize + "px monospace";
+            drops.forEach((y, i) => {
+                const text = letters.charAt(Math.floor(Math.random() * letters.length));
+                ctx.fillText(text, i * fontSize, y * fontSize);
+                if (y * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            });
+        }
+        setInterval(draw, 33);
+        window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
+    </script>
+</body>
+</html>
